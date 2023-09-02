@@ -1,0 +1,19 @@
+{
+  "name": "wetube3",
+  "version": "1.0.0",
+  "description": "wetube practice coding using npm etc",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/youngnu/wetube3.git"
+  },
+  "author": "kimyongbeom",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/youngnu/wetube3/issues"
+  },
+  "homepage": "https://github.com/youngnu/wetube3#readme"
+}
