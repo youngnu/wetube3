@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "wetube practice coding using npm etc",
   "scripts": {
-    "dev": "node index.js"
+    "dev": "nodemon --exec babel-node index.js"
   },
   "repository": {
     "type": "git",
