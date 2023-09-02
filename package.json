@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "wetube practice coding using npm etc",
   "scripts": {
-    "dev": "nodemon --exec babel-node index.js"
+    "dev": "nodemon --exec babel-node src/server.js"
   },
   "repository": {
     "type": "git",
@@ -15,13 +15,13 @@
     "url": "https://github.com/youngnu/wetube3/issues"
   },
   "homepage": "https://github.com/youngnu/wetube3#readme",
-  "dependencies": {
-    "express": "^4.18.2"
-  },
   "devDependencies": {
     "@babel/core": "^7.22.11",
     "@babel/node": "^7.22.10",
     "@babel/preset-env": "^7.22.14",
     "nodemon": "^3.0.1"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
   }
 }
