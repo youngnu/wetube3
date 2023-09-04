@@ -1,8 +1,10 @@
+import morgan from "morgan";
 import express from "express";
 
-const app = express();
 const PORT = 4000;
 
+const app = express();
+const logger = morgan("dev")
 
 const Middleware = (req, res, next) => {
     console.log("PATH", req.path)
@@ -21,6 +23,7 @@ const handleLogin = (req, res) => {
     res.send("I'm Login🤣")
 };
 
+app.use(logger);
 app.use(Middleware, LoggerMiddle);
 app.get("/", handleHoem);
 app.get("/login", handleLogin);
