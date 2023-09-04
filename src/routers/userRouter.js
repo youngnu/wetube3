@@ -1,9 +1,10 @@
 import express from "express";
+import { handleLogout } from "../controllers/userController";
+import { handleUserEdit } from "../controllers/userController";
 
 const userRouter = express.Router();
-const handleLogin = (req, res) => {
-    return res.send("I'm Login 🤣")
-};
-userRouter.get("/login", handleLogin)
+
+userRouter.get("/logout", handleLogout)
+userRouter.get("/edit", handleUserEdit)
 
 export default userRouter

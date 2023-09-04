@@ -1,9 +1,11 @@
 import express from "express";
+import { handleHoem, search } from "../controllers/videoController";
+import { handleJoin } from "../controllers/userController";
 
 const rootRouter = express.Router();
-const handleHoem = (req, res) => {
-    return res.send("I'm in Home 😘")
-};
-rootRouter.get("/", handleHoem)
+
+rootRouter.get("/", handleHoem);
+rootRouter.get("/join", handleJoin);
+rootRouter.get("/search", search)
 
 export default rootRouter
