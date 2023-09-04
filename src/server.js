@@ -5,31 +5,31 @@ const PORT = 4000;
 
 const app = express();
 const logger = morgan("dev")
-
-const Middleware = (req, res, next) => {
-    console.log("PATH", req.path)
-    next()
-};
-
-const LoggerMiddle = (req, res, next) => {
-    console.log("METHOD", req.method)
-    next()
-};
-
-const handleHoem = (req, res) => {
-    res.send("I'm in Home😘")
-};
-const handleLogin = (req, res) => {
-    res.send("I'm Login🤣")
-};
-
 app.use(logger);
-app.use(Middleware, LoggerMiddle);
-app.get("/", handleHoem);
-app.get("/login", handleLogin);
 
+const globalRouter = express.Router();
+const handleHoem = (req, res) => {
+    return res.send("I'm in Home 😘")
+};
+globalRouter.get("/", handleHoem)
+
+const userRouter = express.Router();
+const handleLogin = (req, res) => {
+    return res.send("I'm Login 🤣")
+};
+userRouter.get("/login", handleLogin)
+
+const videoRouter = express.Router();
+const handleWatchVideo = (req, res) => {
+    return res.send("Watch video 🤟")
+};
+videoRouter.get("/watch", handleWatchVideo)
+
+app.use("/", globalRouter);
+app.use("/user", userRouter);
+app.use("/video", videoRouter);
 
 const handleListening = () => {
     console.log(`✅Server listening My port on http://localhost:${PORT}`)
-}
+};
 app.listen(PORT, handleListening);
