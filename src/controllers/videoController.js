@@ -4,11 +4,11 @@ export const handleHoem = (req, res) => {
 };
 
 export const handleWatchVideo = (req, res) => {
-    return res.send("Watch video 🤟")
+    return res.render("watch", {pageTitle: "Watch"})
 };
 
 export const search = (req, res) => {
-    res.send("Search Videos!!")
+    return res.render("search", {pageTitle: "Search"})
 }
 
 export const handleUpload = (req, res) => {
