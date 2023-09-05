@@ -1,5 +1,31 @@
 export const handleHoem = (req, res) => {
-    const videos = [1, 2, 3, 4, 5, 6]
+    const videos = [
+    {
+        title: "First Video",
+        description: "Your are the best😉",
+        createdAt: "2minutes ago",
+        views: 30,
+    },       
+    {
+        title: "Second Video",
+        description: "OMG 🫣",
+        createdAt: "2minutes ago",
+        views: 400, 
+    },
+    {
+        title: "Third Video",
+        description: "This is crazy🤟",
+        createdAt: "2minutes ago",
+        views: 50, 
+    },
+    {
+        title: "You are so cute 😍",
+        description: "Your Very Sexy 😍",
+        createdAt: "2minutes ago",
+        views: 560 
+    },
+
+    ]
     return res.render("home", {pageTitle: "HOME", videos})
 };
 

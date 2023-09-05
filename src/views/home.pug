@@ -3,6 +3,7 @@ include mixins/video
 
 block content
     h2 We're in HOMEPAGE!!!
-    ul
-        each item in videos
-            +video(item)
+    each item in videos
+        +video(item)
+    else
+        li Sorry nothing Found
