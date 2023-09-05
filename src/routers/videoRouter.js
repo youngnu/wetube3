@@ -4,8 +4,8 @@ import { handleWatchVideo, handleUpload, handleEditVideo, handleVideoDelete } fr
 const videoRouter = express.Router();
 
 videoRouter.get("/upload", handleUpload)
-videoRouter.get("/:id", handleWatchVideo)
-videoRouter.get("/:id/edit", handleEditVideo)
-videoRouter.get("/:id/delete", handleVideoDelete)
+videoRouter.get("/:id(\\d+)", handleWatchVideo)
+videoRouter.get("/:id(\\d+)/edit", handleEditVideo)
+videoRouter.get("/:id(\\d+)/delete", handleVideoDelete)
 
 export default videoRouter
