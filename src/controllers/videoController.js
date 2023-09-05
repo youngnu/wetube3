@@ -1,5 +1,5 @@
 export const handleHoem = (req, res) => {
-    return res.send("I'm in Home 😘")
+    return res.render("home", {pageTitle: "HOME"})
 };
 
 export const handleWatchVideo = (req, res) => {
