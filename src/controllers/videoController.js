@@ -1,5 +1,6 @@
 export const handleHoem = (req, res) => {
-    return res.render("home", {pageTitle: "HOME"})
+    const videos = [1, 2, 3, 4, 5, 6]
+    return res.render("home", {pageTitle: "HOME", videos})
 };
 
 export const handleWatchVideo = (req, res) => {
