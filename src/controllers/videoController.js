@@ -34,7 +34,9 @@ export const handleHoem = (req, res) => {
 };
 
 export const handleWatchVideo = (req, res) => {
-    return res.render("watch", {pageTitle: "Watch"})
+    const {id} = req.params
+    const video = videos[id-1]
+    return res.render("watch", {pageTitle: `Watching ${video.title} video`, video})
 };
 
 export const search = (req, res) => {
