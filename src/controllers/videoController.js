@@ -3,7 +3,7 @@ let videos = [
         title: "First Video",
         description: "Your are the best😉",
         createdAt: "2minutes ago",
-        views: 30,
+        views: 1,
         id: 1
     },       
     {
