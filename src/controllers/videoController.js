@@ -43,13 +43,20 @@ export const search = (req, res) => {
     return res.render("search", {pageTitle: "Search"})
 }
 
+export const getEdit = (req, res) => {
+    const {id} = req.params
+    const video = videos[id-1]
+    return res.render("edit", {pageTitle: "Editing", video})
+}
+
+export const postEdit = (req, res) => {
+    console.log(req.body)    
+}
+
 export const handleUpload = (req, res) => {
     res.send("Upload Your Videos 🤟")
 }
 
-export const handleEditVideo = (req, res) => {
-    res.send("Edit Vdieos😁")
-}
 
 export const handleVideoDelete = (req, res) =>{
     res.send("Delete Videos 😎")

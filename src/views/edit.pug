@@ -1,0 +1,8 @@
+extends base.pug
+
+block content
+    h4 Change video
+    form(method="POST")
+        input(placeholder="video title", name="title", value=video.title)
+        input(placeholder="video description", name="description", value=video.description)
+        input(value="Save", type="submit")
