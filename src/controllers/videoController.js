@@ -1,41 +1,13 @@
-let videos = [
-    {
-        title: "First Video",
-        description: "Your are the best😉",
-        createdAt: "2minutes ago",
-        views: 1,
-        id: 1
-    },       
-    {
-        title: "Second Video",
-        description: "OMG 🫣",
-        createdAt: "2minutes ago",
-        views: 400,
-        id: 2 
-    },
-    {
-        title: "Third Video",
-        description: "This is crazy🤟",
-        createdAt: "2minutes ago",
-        views: 50,
-        id: 3 
-    },
-    {
-        title: "You are so cute 😍",
-        description: "Your Very Sexy 😍",
-        createdAt: "2minutes ago",
-        views: 560,
-        id: 4 
-    },
-]
+import Video from "../models/Video"
 
-export const handleHoem = (req, res) => {
+export const handleHoem = async (req, res) => {
+    const videos = await Video.find({});
     return res.render("home", {pageTitle: "HOME", videos})
 };
 
-export const handleWatchVideo = (req, res) => {
+export const handleWatchVideo = async (req, res) => {
     const {id} = req.params
-    const video = videos[id-1]
+    const video = await Video.findById(id)
     return res.render("watch", {pageTitle: `Watching ${video.title} video`, video})
 };
 
@@ -43,23 +15,36 @@ export const search = (req, res) => {
     return res.render("search", {pageTitle: "Search"})
 }
 
-export const getEdit = (req, res) => {
+export const getEdit = async (req, res) => {
     const {id} = req.params
-    const video = videos[id-1]
+    const video = await Video.findById(id)
     return res.render("edit", {pageTitle: "Editing", video})
 }
 
 export const postEdit = (req, res) => {
     const {id} = req.params
     const {title} = req.body
-    videos[id - 1].title = title
+    const video = Video.findById(id)
     return res.redirect("/")   
 }
 
-export const handleUpload = (req, res) => {
-    res.send("Upload Your Videos 🤟")
+export const getUpload = (req, res) => {
+    return res.render("upload", {pageTitle: "Upload Video"})
 }
 
+export const postUpload = async (req, res) => {
+    const { title, description, hashtags } = req.body;
+    const video = await Video.create({
+        title,
+        description,
+        hashtags,
+        meta: {
+            views: 0
+        }
+    });
+    console.log(video);
+    return res.redirect("/")
+}
 
 export const handleVideoDelete = (req, res) =>{
     res.send("Delete Videos 😎")
