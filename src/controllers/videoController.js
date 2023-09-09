@@ -21,10 +21,14 @@ export const getEdit = async (req, res) => {
     return res.render("edit", {pageTitle: "Editing", video})
 }
 
-export const postEdit = (req, res) => {
+export const postEdit = async (req, res) => {
     const {id} = req.params
-    const {title} = req.body
-    const video = Video.findById(id)
+    const {title, description, hashtags} = req.body
+    await Video.findByIdAndUpdate(id, {
+        title,
+        description,
+        hashtags
+    })
     return res.redirect("/")   
 }
 
