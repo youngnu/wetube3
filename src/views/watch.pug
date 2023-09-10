@@ -1,7 +1,10 @@
 extends base.pug
 
 block content
-    h3 Hello! This page is Watch Video ✌️
     h4 Enjoy My #{video.title} Video
-    h5 #{video.views} #{video.views === 1? "view" : "views"}
+    div
+        p=video.description
+        small=video.createdAt
     a(href=`${video.id}/edit`) Edit video &rarr;
+    br
+    a(href=`${video.id}/delete`) Delete video &rarr;
