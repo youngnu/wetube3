@@ -6,6 +6,13 @@ export const getJoin = (req, res) => {
 
 export const postJoin = async (req, res) => {
     const {name, email, username, password, password2 } = req.body;
+    const userExist = await User.find({ $or :[{ username}, {email}]})
+    if(password !== password2){
+        return res.render("join", {pageTitle: "Join", errorMessage: "Password not Match"})
+    }
+    if(userExist){
+        return res.render("join", {pageTitle: "Join", errorMessage: "user already exist"})
+    };
     await User.create({
         name,
         email,
