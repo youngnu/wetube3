@@ -34,6 +34,18 @@ export const getLogin = (req, res) =>{
     return res.render("login", {pageTitle: "Login"})
 }
 
+export const postLogin = async (req, res) =>{
+    const {username, password} = req.body;
+    const user = await User.exists({username});
+    if(!user){
+        return res.status(400).render("404", {pageTitle: "Login", errorMessage: "You need to Join"})
+    };
+    const passwordmatch = await bycrpt.compare(password, user.password)
+    if(!passwordmatch){
+        return res.status(400).render("404", {pageTitle: "Login", errorMessage: "Password confrim"})
+    };
+    return res.redirect("/")
+}
 export const handleLogout = (req, res) => {
     return res.send("I'm Logout 🤣")
 };
