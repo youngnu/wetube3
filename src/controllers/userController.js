@@ -1,4 +1,5 @@
 import User from "../models/User";
+import bcrypt from "bcrypt";
 
 export const getJoin = (req, res) => {
     return res.render("join", {pageTitle: "Join"})
@@ -36,16 +37,19 @@ export const getLogin = (req, res) =>{
 
 export const postLogin = async (req, res) =>{
     const {username, password} = req.body;
-    const user = await User.exists({username});
+    console.log(username, password)
+    const user = await User.findOne({username});
+    console.log(user)
     if(!user){
-        return res.status(400).render("404", {pageTitle: "Login", errorMessage: "You need to Join"})
+        return res.status(404).render("404", {pageTitle: "Wrong", errorMessage: "You need to Join"})
     };
-    const passwordmatch = await bycrpt.compare(password, user.password)
+    const passwordmatch = await bcrypt.compare(password, user.password)
     if(!passwordmatch){
-        return res.status(400).render("404", {pageTitle: "Login", errorMessage: "Password confrim"})
+        return res.status(404).render("404", {pageTitle: "Wrong", errorMessage: "Password confrim"})
     };
     return res.redirect("/")
 }
+
 export const handleLogout = (req, res) => {
     return res.send("I'm Logout 🤣")
 };
