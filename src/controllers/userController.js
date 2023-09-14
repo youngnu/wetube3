@@ -37,9 +37,7 @@ export const getLogin = (req, res) =>{
 
 export const postLogin = async (req, res) =>{
     const {username, password} = req.body;
-    console.log(username, password)
     const user = await User.findOne({username});
-    console.log(user)
     if(!user){
         return res.status(404).render("404", {pageTitle: "Wrong", errorMessage: "You need to Join"})
     };
@@ -47,6 +45,8 @@ export const postLogin = async (req, res) =>{
     if(!passwordmatch){
         return res.status(404).render("404", {pageTitle: "Wrong", errorMessage: "Password confrim"})
     };
+    req.session.loggedIn = true;
+    req.session.user = user;
     return res.redirect("/")
 }
 
