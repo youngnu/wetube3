@@ -7,6 +7,7 @@ import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
 import session from "express-session";
 import {localMiddleware} from "./middlewares"
+import MongoStore from "connect-mongo";
 
 const PORT = 4000;
 
@@ -22,6 +23,7 @@ app.use(
         secret: "Hello!",
         resave: false,
         saveUninitialized: false,
+        store: MongoStore.create({ mongoUrl: "mongodb://127.0.0.1:27017/wetube3"})
     })
 );
 app.use(localMiddleware);
