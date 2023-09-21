@@ -100,27 +100,23 @@ export const finshGithubLogin = async (req, res) => {
         if(!emailObj){
             return res.redirect("/login");
         }
-        const existingUser = await User.findOne({ email : emailObj.email})
-        if(existingUser){
-            req.session.user = existingUser;//session을 이용하여 user정보 넣기
-            req.session.loggedIn = true; //session을 이용하여 LoggedIn=true값 넣기
-            return res.redirect("/")
-        } else {
-            const user = await User.create({
+       let user = await User.findOne({ email : emailObj.email})
+        if(!user){
+            user = await User.create({
                 name: userData.name,
                 email: emailObj.email,
                 username: userData.login,
                 password: "",
                 socialOnly: true,
             })
-            req.session.user = user
-            req.session.loggedIn = true;
-            return res.redirect("/")
-        }
+        }            
+        req.session.user = existingUser;//session을 이용하여 user정보 넣기
+        req.session.loggedIn = true; //session을 이용하여 LoggedIn=true값 넣기
+        return res.redirect("/")
     } else {
         return res.redirect("/login")
     }
-}
+};
 
 
 export const handleLogout = (req, res) => {
