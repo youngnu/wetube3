@@ -69,20 +69,28 @@ export const finshGithubLogin = async (req, res) => {
         client_secret: "da158d214ed2ec119e73f0a265a0d274104e4a9d",
         code: req.query.code
     }
-    console.log("config", config)
     const params = new URLSearchParams(config).toString()
-    console.log("params", params)
     const finalUrl = `${baseUrl}?${params}`
-    console.log("finalUrl", finalUrl)
     const data = await fetch(finalUrl, {
         method: "POST",
         headers: {
             Accept: "application/json"
         },
     })
-    console.log("data", data)
     const json = await data.json()
-    console.log("json", json)
+    console.log(json)
+    if("access_token" in json){
+        const {access_token} = json;
+        const userRequest = await fetch("https://api.github.com/user",{
+            headers:{
+                Authorization: `Bearer ${access_token}`,
+            },
+        })
+        const userData = await userRequest.json()
+        console.log("userData: ", userData)
+    } else {
+        return res.redirect("/login")
+    }
 }
 
 
