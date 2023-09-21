@@ -1,10 +1,10 @@
 import express from "express";
-import { handleLogout, handleUserEdit, startGithubLogin, finshGithubLogin } from "../controllers/userController";
+import { handleLogout, getEdit, postEdit, startGithubLogin, finshGithubLogin } from "../controllers/userController";
 
 const userRouter = express.Router();
 
 userRouter.get("/logout", handleLogout)
-userRouter.get("/edit", handleUserEdit)
+userRouter.route("/edit").get(getEdit).post(postEdit)
 userRouter.get("/github/start", startGithubLogin)
 userRouter.get("/github/finish", finshGithubLogin)
 

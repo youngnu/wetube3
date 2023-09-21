@@ -127,6 +127,22 @@ export const handleLogout = (req, res) => {
 };
 
 
-export const handleUserEdit = (req, res) => {
-    res.send("User Editing 👊🏻")
+export const getEdit = (req, res) => {
+    return res.render("edit-profile", {pageTitle: "Edit Profile"})
+}
+
+export const postEdit = async (req, res) => {
+    const { user: {_id}} = req.session
+    const {name, email, username} = req.body
+    const updateUser = await User.findByIdAndUpdate(
+        _id, 
+        {
+        name,
+        email,
+        username,
+        },
+        { new: true }
+    );
+    req.session.user = updateUser
+    return res.redirect("/users/edit")
 }
