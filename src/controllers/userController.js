@@ -141,8 +141,8 @@ export const postEdit = async (req, res) => {
         email,
         username,
         },
-        { new: true }
+        { new: true } // findbyidandupdate() give after update applied
     );
     req.session.user = updateUser
-    return res.redirect("/users/edit")
+    return res.redirect("/users/edit") // do not render pug template
 }
