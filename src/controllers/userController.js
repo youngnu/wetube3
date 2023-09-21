@@ -87,7 +87,7 @@ export const finshGithubLogin = async (req, res) => {
             },
         })
         const userData = await userRequest.json()
-        console.log("userData: ", userData)
+        console.log("userData", userData)
         const emailRequest = await fetch("https://api.github.com/user/emails", {
             headers:{
                 Authorization: `Bearer ${access_token}`,
@@ -95,6 +95,30 @@ export const finshGithubLogin = async (req, res) => {
         })
         const emailData = await emailRequest.json()
         console.log("emailData: ", emailData)
+        const emailObj = emailData.find(
+            (email) => email.primary ===true && email.verified===true
+        )
+        console.log("emailObj", emailObj)
+        if(!emailObj){
+            return res.redirect("/login");
+        }
+        const existingUser = await User.findOne({ email : emailObj.email})
+        if(existingUser){
+            req.session.user = existingUser;//session을 이용하여 user정보 넣기
+            req.session.loggedIn = true; //session을 이용하여 LoggedIn=true값 넣기
+            return res.redirect("/")
+        } else {
+            const user = await User.create({
+                name: userData.name,
+                email: emailObj.email,
+                username: userData.login,
+                password: "",
+                socialOnly: true,
+            })
+            req.session.user = user
+            req.session.loggedIn = true;
+            return res.redirect("/")
+        }
     } else {
         return res.redirect("/login")
     }
