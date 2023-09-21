@@ -1,3 +1,4 @@
+import "dotenv/config"
 import "./db"
 import "./models/Video"
 import express from "express";
@@ -20,7 +21,7 @@ app.use(logger);
 app.use(express.urlencoded({ extended: true }))
 app.use(
     session({
-        secret: "Hello!",
+        secret: process.env.DB_SECRET,
         resave: false,
         saveUninitialized: false,
         store: MongoStore.create({ mongoUrl: "mongodb://127.0.0.1:27017/wetube3"})
