@@ -87,6 +87,7 @@ export const finshGithubLogin = async (req, res) => {
             },
         })
         const userData = await userRequest.json()
+        console.log(userData)
         const emailData = await(
             await fetch("https://api.github.com/user/emails", {
             headers:{
@@ -103,13 +104,14 @@ export const finshGithubLogin = async (req, res) => {
        let user = await User.findOne({ email : emailObj.email})
         if(!user){
             user = await User.create({
+                avatarUrl: userData.avatar_url,
                 name: userData.name,
                 email: emailObj.email,
                 username: userData.login,
                 password: "",
                 socialOnly: true,
-            })
-        }            
+            })        
+        }
         req.session.user = user;//session을 이용하여 user정보 넣기
         req.session.loggedIn = true; //session을 이용하여 LoggedIn=true값 넣기
         return res.redirect("/")
@@ -120,7 +122,8 @@ export const finshGithubLogin = async (req, res) => {
 
 
 export const handleLogout = (req, res) => {
-    return res.send("I'm Logout 🤣")
+    req.session.destroy()
+    return res.redirect("/")
 };
 
 
