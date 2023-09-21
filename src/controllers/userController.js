@@ -37,7 +37,7 @@ export const getLogin = (req, res) =>{
 
 export const postLogin = async (req, res) =>{
     const {username, password} = req.body;
-    const user = await User.findOne({username});
+    const user = await User.findOne({username, socialOnly:false});
     if(!user){
         return res.status(404).render("404", {pageTitle: "Wrong", errorMessage: "You need to Join"})
     };
@@ -87,18 +87,16 @@ export const finshGithubLogin = async (req, res) => {
             },
         })
         const userData = await userRequest.json()
-        console.log("userData", userData)
-        const emailRequest = await fetch("https://api.github.com/user/emails", {
+        const emailData = await(
+            await fetch("https://api.github.com/user/emails", {
             headers:{
                 Authorization: `Bearer ${access_token}`,
             },
         })
-        const emailData = await emailRequest.json()
-        console.log("emailData: ", emailData)
+        ).json()
         const emailObj = emailData.find(
             (email) => email.primary ===true && email.verified===true
         )
-        console.log("emailObj", emailObj)
         if(!emailObj){
             return res.redirect("/login");
         }
