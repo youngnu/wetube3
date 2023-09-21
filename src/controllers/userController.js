@@ -110,7 +110,7 @@ export const finshGithubLogin = async (req, res) => {
                 socialOnly: true,
             })
         }            
-        req.session.user = existingUser;//session을 이용하여 user정보 넣기
+        req.session.user = user;//session을 이용하여 user정보 넣기
         req.session.loggedIn = true; //session을 이용하여 LoggedIn=true값 넣기
         return res.redirect("/")
     } else {
