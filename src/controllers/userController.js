@@ -88,6 +88,13 @@ export const finshGithubLogin = async (req, res) => {
         })
         const userData = await userRequest.json()
         console.log("userData: ", userData)
+        const emailRequest = await fetch("https://api.github.com/user/emails", {
+            headers:{
+                Authorization: `Bearer ${access_token}`,
+            },
+        })
+        const emailData = await emailRequest.json()
+        console.log("emailData: ", emailData)
     } else {
         return res.redirect("/login")
     }
