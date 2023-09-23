@@ -146,3 +146,29 @@ export const postEdit = async (req, res) => {
     req.session.user = updateUser
     return res.redirect("/users/edit") // do not render pug template
 }
+
+export const getChangePassword = (req, res) => {
+    return res.render("users/change-password", {pageTitle: "Change-Password"})
+}
+
+export const postChangepassword = async (req, res) => {
+    const { oldPassword, newPassword, confirmPassword } = req.body;
+    const { user: {_id}} = req.session;
+    const user = await User.findById(_id);
+    const ok = await bcrypt.compare( oldPassword, user.password);
+    if(!ok){
+        return res.status(400).render("users/change-password", {
+            pageTitle: "Change-Password",
+            errorMessage: "Not Match Oldpassword"
+        })
+    };
+    if(newPassword !== confirmPassword){
+        return res.status(400).render("users/change-password", {
+            pageTitle: "Change-Password",
+            errorMessage: "Not Match newPassword & confirmPassword"
+        })
+    };
+    user.password = newPassword;
+    await user.save();
+    return res.redirect("/");
+}
