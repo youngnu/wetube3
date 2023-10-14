@@ -55,7 +55,7 @@ export const postUpload = async (req, res) => {
     // const { user: {_id}} = req.session과 같다
     const { path : fileUrl } = req.file
     const { title, description, hashtags } = req.body;
-    await Video.create({
+    const newVideo = await Video.create({
         title,
         fileUrl,
         description,
@@ -65,6 +65,10 @@ export const postUpload = async (req, res) => {
         },
         owner: _id
     });
+    console.log(newVideo)
+    const user = await User.findById(_id)
+    user.videos.push(newVideo._id)
+    user.save()
     return res.redirect("/");
 };
 
