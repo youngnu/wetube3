@@ -7,7 +7,8 @@ export const handleHoem = async (req, res) => {
 
 export const handleWatchVideo = async (req, res) => {
     const {id} = req.params;
-    const video = await Video.findById(id);
+    const video = await Video.findById(id).populate("owner");
+    console.log(video)
     return res.render("watch", {pageTitle: video.title, video});
 };
 
@@ -50,6 +51,8 @@ export const getUpload = (req, res) => {
 };
 
 export const postUpload = async (req, res) => {
+    const { _id } = req.session.user;
+    // const { user: {_id}} = req.session과 같다
     const { path : fileUrl } = req.file
     const { title, description, hashtags } = req.body;
     await Video.create({
@@ -59,7 +62,8 @@ export const postUpload = async (req, res) => {
         hashtags: Video.formatHashtags(hashtags),
         meta: {
             views: 0
-        }
+        },
+        owner: _id
     });
     return res.redirect("/");
 };
