@@ -12,7 +12,9 @@ header
                 li
                     a(href="/users/logout") Logout
                 li
-                    a(href="/users/edit") #{loggedInUser.name}의 Profile
+                    a(href="/users/edit") Edit Profile
+                li
+                    a(href=`/users/${loggedInUser._id}`) #{loggedInUser.name} Profile
             else 
                 li
                     a(href="/join") Join
