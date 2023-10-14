@@ -1,4 +1,5 @@
 import Video from "../models/Video";
+import User from "../models/User"
 
 export const handleHoem = async (req, res) => {
     const videos = await Video.find({}).sort({createdAt: "desc"});
@@ -8,7 +9,6 @@ export const handleHoem = async (req, res) => {
 export const handleWatchVideo = async (req, res) => {
     const {id} = req.params;
     const video = await Video.findById(id).populate("owner");
-    console.log(video)
     return res.render("watch", {pageTitle: video.title, video});
 };
 
