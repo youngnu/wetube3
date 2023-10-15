@@ -29,6 +29,8 @@ app.use(
 );
 app.use(localMiddleware);
 app.use("/uploads", express.static("uploads"));
+app.use("/assets", express.static("assets"))
+//Url(/assets)과 폴더명("assets")이 같을 필요는 없다.
 app.use("/", rootRouter);
 app.use("/users", userRouter);
 app.use("/videos", videoRouter);
