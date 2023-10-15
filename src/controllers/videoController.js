@@ -27,16 +27,27 @@ export const search = async (req, res) => {
 
 export const getEdit = async (req, res) => {
     const {id} = req.params;
+    const {user: {_id}} = req.session;
     const video = await Video.findById(id);
+    console.log("id", id)
+    console.log("_id", _id)
+    console.log("video.owner", video.owner)
+    if(String(video.owner) !== String(_id)){
+        return res.status(403).redirect("/")
+    }
     return res.render("edit", {pageTitle: "Editing", video});
 };
 
 export const postEdit = async (req, res) => {
     const {id} = req.params;
+    const {user: {_id}} = req.session;
     const {title, description, hashtags} = req.body;
     const video = await Video.exists({_id : id})
     if(!video){
         return res.render("404", {pageTitle: "video not found"});
+    }
+    if(String(video.owner) !== String(_id)){
+      return res.status(403).redirect("/") 
     }
     await Video.findByIdAndUpdate(id, {
         title,
