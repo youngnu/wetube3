@@ -65,7 +65,6 @@ export const postUpload = async (req, res) => {
         },
         owner: _id
     });
-    console.log(newVideo)
     const user = await User.findById(_id)
     user.videos.push(newVideo._id)
     user.save()
