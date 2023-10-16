@@ -9,7 +9,7 @@ module.exports = {
         filename: "css/styles.css"
     })],
     output: {
-        filename: "main.js",
+        filename: "js/main.js",
         path: path.resolve(__dirname, "assets"),
         clean: true,
     },

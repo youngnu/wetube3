@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "wetube practice coding using npm etc",
   "scripts": {
-    "dev": "nodemon --exec babel-node src/server.js",
+    "dev": "nodemon",
     "assets": "webpack --config webpack.config.js"
   },
   "repository": {
