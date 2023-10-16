@@ -1,16 +1,11 @@
-import "dotenv/config"
-import "./db"
-import "./models/Video"
 import express from "express";
 import morgan from "morgan";
-import rootRouter from "./routers/rootRouter";
-import userRouter from "./routers/userRouter";
-import videoRouter from "./routers/videoRouter";
 import session from "express-session";
-import {localMiddleware} from "./middlewares"
 import MongoStore from "connect-mongo";
-
-const PORT = 4000;
+import rootRouter from "./routers/rootRouter";
+import videoRouter from "./routers/videoRouter";
+import userRouter from "./routers/userRouter";
+import {localMiddleware} from "./middlewares"
 
 const app = express();
 const logger = morgan("dev")
@@ -35,7 +30,4 @@ app.use("/", rootRouter);
 app.use("/users", userRouter);
 app.use("/videos", videoRouter);
 
-const handleListening = () => {
-    console.log(`✅ Server listening My port on http://localhost:${PORT} 🌙`)
-};
-app.listen(PORT, handleListening); 
+export default app;
