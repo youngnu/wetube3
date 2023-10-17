@@ -1,14 +1,14 @@
 header
-    h1=pageTitle
+    a(href="/").header_logo
+        i.fab.fa-youtube
     nav
         ul
             li
-                a(href="/") Home
-            li
-                a(href="/videos/upload") Upload video
-            li
-                a(href="/search") Search
+                a(href="/search")
+                    i.fas.fa-search
             if loggedIn
+                li
+                    a(href="/videos/upload") Upload video
                 li
                     a(href="/users/logout") Logout
                 li
