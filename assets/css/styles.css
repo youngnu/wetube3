@@ -179,6 +179,27 @@ form label {
   text-decoration: underline;
 }
 
+.video_data {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.video_data .video_title {
+  font-size: 26px;
+  margin-bottom: 5px;
+}
+.video_data .video_createdAt {
+  font-size: 10px;
+}
+.video_data .video_owner {
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+.video_data .video_owner a {
+  color: cornflowerblue;
+  text-decoration: underline;
+}
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   background-color: #0e1117;
