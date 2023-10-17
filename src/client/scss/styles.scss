@@ -2,9 +2,12 @@
 @import "./config/reset";
 
 @import "./components/header.scss";
+@import "./components/forms.scss";
 
 @import "./screens/edit-profile.scss";
 @import "./screens/watch.scss";
+@import "./screens/search.scss";
+@import "./screens/upload.scss";
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,

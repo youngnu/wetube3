@@ -165,6 +165,55 @@ header .header_avatar {
   border-radius: 50%;
 }
 
+form {
+  max-width: 420px;
+  margin: 0 auto;
+}
+form:not(.search_form) {
+  padding: 30px;
+  background-color: rgba(14, 17, 23, 0.7);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+input:not(input[type=range]),
+input[type=submit] {
+  all: unset;
+  padding: 15px 20px;
+  border-radius: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: black;
+  margin-bottom: 5px;
+  font-size: 16px;
+  color: white;
+  width: 90%;
+}
+input:not(input[type=range])::placeholder,
+input[type=submit]::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+input[type=submit],
+.social_btn {
+  border-radius: 5px;
+  padding: 12px 20px;
+  background-color: white !important;
+  color: #cc0d00 !important;
+  text-align: center !important;
+  cursor: pointer;
+  display: block;
+  border: none;
+}
+input[type=submit]:focus,
+.social_btn:focus {
+  outline: none;
+}
+input[type=submit]:disabled,
+.social_btn:disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
 form label {
   font-size: 14px;
   margin-bottom: 10px;
@@ -198,6 +247,49 @@ form label {
 .video_data .video_owner a {
   color: cornflowerblue;
   text-decoration: underline;
+}
+
+.search_form {
+  margin-bottom: 60px;
+  display: flex;
+  position: relative;
+  align-items: center;
+}
+.search_form input {
+  all: unset;
+  padding: 60px, 20px;
+  border-radius: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: black;
+  margin-bottom: 5px;
+  font-size: 16px;
+  color: white;
+  width: 90%;
+}
+.search_form button {
+  all: unset;
+}
+.search_form button {
+  position: absolute;
+  right: 15px;
+  font-size: 18px;
+  background-color: rgba(0, 0, 0, 0);
+  text-align: center;
+  cursor: pointer;
+}
+
+.upload_container {
+  width: 100%;
+}
+.upload_container .upload_video {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.upload_container .upload_video video {
+  max-width: 100%;
+  margin-bottom: 10px;
 }
 
 body {
