@@ -2,8 +2,15 @@ extends ../base.pug
 include ../mixins/video
 
 block content
-    each video in user.videos
-        +video(video)
-    else
-        li Sorry
+    div.profile_data 
+        if loggedInUser.socialOnly
+            img(src=user.avatarUrl).avatar
+        else
+            img(src="/" + user.avatarUrl).avatar
+        h3=user.name
+    div.video-grid
+        each video in user.videos
+            +video(video)
+        else
+            li Sorry
 
