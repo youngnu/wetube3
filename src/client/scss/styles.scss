@@ -3,11 +3,14 @@
 
 @import "./components/header.scss";
 @import "./components/forms.scss";
+@import "./components/footer.scss";
 
 @import "./screens/edit-profile.scss";
 @import "./screens/watch.scss";
 @import "./screens/search.scss";
 @import "./screens/upload.scss";
+@import "./screens/home.scss";
+@import "./screens/profile.scss";
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,

@@ -2,8 +2,8 @@ extends base.pug
 include mixins/video
 
 block content
-    h2 We're in HOMEPAGE!!!
-    each item in videos
-        +video(item)
-    else
-        li Sorry nothing Found
+    div.video_grid
+        each item in videos
+            +video(item)
+        else
+            spand.emty_message Sorry nothing Found
