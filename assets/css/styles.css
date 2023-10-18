@@ -139,6 +139,10 @@ header {
   justify-content: space-between;
   align-items: center;
 }
+header .header_logo {
+  color: #cc0d00;
+  font-size: 40px;
+}
 header ul {
   display: flex;
   justify-content: space-between;

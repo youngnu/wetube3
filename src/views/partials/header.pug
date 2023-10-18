@@ -14,7 +14,11 @@ header
                 li
                     a(href="/users/edit") Edit Profile
                 li
-                    a(href=`/users/${loggedInUser._id}`) #{loggedInUser.name} Profile
+                    a(href=`/users/${loggedInUser._id}`)
+                        if loggedInUser.avatarUrl === " "
+                            span 😘
+                        else
+                            img.header_avatar(src= "/" + loggedInUser.avatarUrl)
             else 
                 li
                     a(href="/join").header_btn Join
