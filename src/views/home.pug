@@ -3,7 +3,7 @@ include mixins/video
 
 block content
     div.video-grid
-        each item in videos
-            +video(item)
+        each video in videos
+            +video(video)
         else
             spand.emty_message Sorry nothing Found
