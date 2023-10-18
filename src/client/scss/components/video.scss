@@ -1,0 +1,20 @@
+.video-mixin {
+    .video-mixin-thumb {
+          height: 140px;
+          border-radius: 7px;
+          width: 200px;
+          background-color: ivory;
+      }
+    .video-mixin-data {
+          padding: 0px 15px;
+      .video-mixin-title {
+          font-size: 18px;
+          display: flex;
+          margin-top: 10px;
+        }
+      .video-mixin-meta {
+          margin-top: 5px;
+          font-size: 12px;
+        }
+    }
+  }

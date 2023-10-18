@@ -225,6 +225,25 @@ footer {
   margin-top: 50px;
 }
 
+.video-mixin .video-mixin-thumb {
+  height: 140px;
+  border-radius: 7px;
+  width: 200px;
+  background-color: ivory;
+}
+.video-mixin .video-mixin-data {
+  padding: 0px 15px;
+}
+.video-mixin .video-mixin-data .video-mixin-title {
+  font-size: 18px;
+  display: flex;
+  margin-top: 10px;
+}
+.video-mixin .video-mixin-data .video-mixin-meta {
+  margin-top: 5px;
+  font-size: 12px;
+}
+
 form label {
   font-size: 14px;
   margin-bottom: 10px;
