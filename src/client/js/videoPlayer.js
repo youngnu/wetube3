@@ -42,13 +42,17 @@ const handleVolumeChange = (event) => {
     video.volume = value;
 }
 
+const formatTime = (seconds) => {
+    return new Date(seconds*1000).toISOString().substring(11, 19)
+}
+
 const handleLoadedMetaData = () => {
-    totalTime.innerText = Math.round(video.duration);
+    totalTime.innerText = formatTime(Math.floor(video.duration));
 }
 
 //이 상태로는 loadedmetadata event랑 timeupdate event가 같이 발생하지 않는 오류가 발생한다... 왜? 일시적인 현상이었던걸로.!
 const handleTimeUpdate = () => {
-    currentTime.innerText= Math.round(video.currentTime);
+    currentTime.innerText = formatTime(Math.floor(video.currentTime));
 }
 
 playBtn.addEventListener("click", handlePlayClick);
