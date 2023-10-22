@@ -5,6 +5,8 @@ const time = document.getElementById("time");
 const volumeRange = document.getElementById("volume");
 const currentTime = document.getElementById("currentTime");
 const totalTime = document.getElementById("totalTime");
+const timeLine = document.getElementById("timeLine");
+
 
 let volumeValue = 0.5
 video.volume = volumeValue
@@ -34,12 +36,17 @@ const handleVolumeChange = (event) => {
     //이 if조건문으로는 "Unmute"인 상태에서 즉 video.muted=true인 상태에서 input의 range를 움직였을 때 실행되는 영역만 정의해준 것이다.
     if(video.muted){
         video.muted = false;
-        muteBtn.innerText = "Mute"
-    }
+    } 
     // let을 이용해서 global variable을 설정해주고 "input" event가 발생하면, 이곳에서 global 변수의 value를 변경시켜줌
     volumeValue = value;
     //video.volume is HTML element
     video.volume = value;
+    //이 조건문으로 volume Btn 조절기능 추가
+    if(video.volume === 0){
+        muteBtn.innerText = "Unmute"
+    } else {
+        muteBtn.innerText = "Mute"
+    }
 }
 
 const formatTime = (seconds) => {
@@ -48,11 +55,18 @@ const formatTime = (seconds) => {
 
 const handleLoadedMetaData = () => {
     totalTime.innerText = formatTime(Math.floor(video.duration));
+    timeLine.max = Math.floor(video.duration);
 }
 
 //이 상태로는 loadedmetadata event랑 timeupdate event가 같이 발생하지 않는 오류가 발생한다... 왜? 일시적인 현상이었던걸로.!
 const handleTimeUpdate = () => {
     currentTime.innerText = formatTime(Math.floor(video.currentTime));
+    timeLine.value = Math.floor(video.currentTime);
+}
+
+const handleTimeLineUpdate = (event) =>{
+    const {target: { value }} = event;
+    video.currentTime = value;
 }
 
 playBtn.addEventListener("click", handlePlayClick);
@@ -60,3 +74,4 @@ muteBtn.addEventListener("click", handleMute);
 volumeRange.addEventListener("input", handleVolumeChange);
 video.addEventListener("loadedmetadata", handleLoadedMetaData);
 video.addEventListener("timeupdate", handleTimeUpdate)
+timeLine.addEventListener("input", handleTimeLineUpdate);

@@ -5,11 +5,13 @@ block content
     div
         button#play Play
         button#mute Mute
-        input(type="range", step="0.2", min="0", max="1", value=0.5)#volume
+        input(type="range", step="0.1", min="0", max="1", value=0.5)#volume
         div
             span#currentTime 00:00
             span /
             sapn#totalTime 00:00
+        div
+            input(type="range", step="1", value=0, min="0")#timeLine
     div.video_data
         p.video_title=video.title
         small.video_owner Uploaded by
