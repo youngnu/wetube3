@@ -4,7 +4,7 @@ const muteBtn = document.getElementById("mute");
 const time = document.getElementById("time");
 const volumeRange = document.getElementById("volume");
 
-
+video.volume = 0.5
 
 const handlePlayClick = () => {
     if(video.paused) {
@@ -25,5 +25,11 @@ const handleMute = () => {
     volumeRange.value = video.muted ? 0 : 0.5;
 }
 
-playBtn.addEventListener("click", handlePlayClick)
-muteBtn.addEventListener("click", handleMute)
+const handleVolumeChange = (e) => {
+    console.log(e)
+}
+
+
+playBtn.addEventListener("click", handlePlayClick);
+muteBtn.addEventListener("click", handleMute);
+volumeRange.addEventListener("change", handleVolumeChange);
