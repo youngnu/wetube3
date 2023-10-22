@@ -46,7 +46,7 @@ const handleLoadedMetaData = () => {
     totalTime.innerText = Math.round(video.duration);
 }
 
-//이 상태로는 loadedmetadata event랑 timeupdate event가 같이 발생하지 않는 오류가 발생한다... 왜?
+//이 상태로는 loadedmetadata event랑 timeupdate event가 같이 발생하지 않는 오류가 발생한다... 왜? 일시적인 현상이었던걸로.!
 const handleTimeUpdate = () => {
     currentTime.innerText= Math.round(video.currentTime);
 }
