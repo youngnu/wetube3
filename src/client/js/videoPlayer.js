@@ -41,7 +41,7 @@ const handleVolumeChange = (event) => {
     volumeValue = value;
     //video.volume is HTML element
     video.volume = value;
-    //이 조건문으로 volume Btn 조절기능 추가
+    //이 조건문으로 Input event 발생되중 video.volume의 값이 0이 되면 더이상 handleMute에 대한 click event가 발생하지 않도록 했다.
     if(video.volume === 0){
         muteBtn.innerText = "Unmute";
         muteBtn.removeEventListener("click", handleMute);
