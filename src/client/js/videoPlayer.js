@@ -4,7 +4,8 @@ const muteBtn = document.getElementById("mute");
 const time = document.getElementById("time");
 const volumeRange = document.getElementById("volume");
 
-video.volume = 0.5
+let volumeValue = 0.5
+video.volume = volumeValue
 
 const handlePlayClick = () => {
     if(video.paused) {
@@ -22,15 +23,19 @@ const handleMute = () => {
         video.muted = true
     };
     muteBtn.innerText = video.muted ? "Unmute" : "Mute";
-    volumeRange.value = video.muted ? 0 : 0.5;
+    //그렇다면 이곳에서 최신화된 volumeValue의 값으로 video.volume을 변경해줌 
+    volumeRange.value = video.muted ? 0 : volumeValue;
 }
 
 const handleVolumeChange = (event) => {    
     const { target : {value}} = event;
+    //이 if조건문으로는 "Unmute"인 상태에서 즉 video.muted=true인 상태에서 input의 range를 움직였을 때 실행되는 영역만 정의해준 것이다.
     if(video.muted){
         video.muted = false;
         muteBtn.innerText = "Mute"
     }
+    // let을 이용해서 global variable을 설정해주고 "input" event가 발생하면, 이곳에서 global 변수의 value를 변경시켜줌
+    volumeValue = value;
     //video.volume is HTML element
     video.volume = value;
 }
