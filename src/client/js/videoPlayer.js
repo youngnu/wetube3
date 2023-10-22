@@ -43,9 +43,11 @@ const handleVolumeChange = (event) => {
     video.volume = value;
     //이 조건문으로 volume Btn 조절기능 추가
     if(video.volume === 0){
-        muteBtn.innerText = "Unmute"
+        muteBtn.innerText = "Unmute";
+        muteBtn.removeEventListener("click", handleMute);
     } else {
-        muteBtn.innerText = "Mute"
+        muteBtn.innerText = "Mute";
+        muteBtn.addEventListener("click",handleMute);
     }
 }
 
