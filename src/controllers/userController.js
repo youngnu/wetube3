@@ -1,4 +1,3 @@
-import Video from "../models/Video"
 import User from "../models/User";
 import bcrypt from "bcrypt";
 
@@ -54,7 +53,7 @@ export const postLogin = async (req, res) =>{
 export const startGithubLogin = (req, res) => {
     const baseUrl =  "https://github.com/login/oauth/authorize"
     const config = {
-        client_id: "8508aa87809e77889bfa",
+        client_id: process.env.GH_CLIENT_ID,
         allow_signup: false,
         scope: "read:user user:email"
     }
@@ -66,8 +65,8 @@ export const startGithubLogin = (req, res) => {
 export const finshGithubLogin = async (req, res) => {
     const baseUrl = "https://github.com/login/oauth/access_token"
     const config = {
-        client_id: "8508aa87809e77889bfa",
-        client_secret: "da158d214ed2ec119e73f0a265a0d274104e4a9d",
+        client_id: process.env.GH_CLIENT_ID,
+        client_secret: process.env.GH_CLIENT_SECRET,
         code: req.query.code
     }
     const params = new URLSearchParams(config).toString()
