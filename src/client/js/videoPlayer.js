@@ -10,6 +10,7 @@ const fullScreenBtn = document.getElementById("fullScreen");
 const videoContainer = document.getElementById("videoContainer");
 const videoControls = document.getElementById("videoControls");
 
+let controlsMovementTimeout = null
 let controlsTimeout = null;
 let volumeValue = 0.5
 video.volume = volumeValue
@@ -93,7 +94,13 @@ const handleMouseMove = () => {
         clearTimeout(controlsTimeout)
         controlsTimeout = null
     };
+    //마우스 커서가 계속 움직이는 경우 videoControls를 유지시키기 위해 .. 근데 굳이..? 선택사항임
+    if(controlsMovementTimeout) {
+        clearTimeout(controlsMovementTimeout)
+        controlsMovementTimeout = null
+    }
     videoControls.classList.add("showing");
+    controlsMovementTimeout = setTimeout(hideControls, 3000)
 };
 
 const handleMouseLeave = () => {
