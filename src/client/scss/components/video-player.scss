@@ -6,8 +6,10 @@
       height: 500px;
     }
     .videoControls {
+      //opacity는 0에서 1까지의 값을 가진다. 1이 되면 투명도는 1(100%)다.
       opacity: 0;
       transition: opacity 0.5s ease-in-out;
+      // Scss 부모선택자 &, 현재 선택자의 부모와 함께 클래스 "showing"을 가진 요소를 선택하는 것을 나타냄
       &.showing {
         opacity: 1;
       }

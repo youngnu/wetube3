@@ -3,18 +3,22 @@ extends base.pug
 block content
     div#videoContainer
         video(src="/"+video.fileUrl)
-        div#videoControls
-            button#play Play
-            button#mute Mute
-            input(type="range", step="0.1", min="0", max="1", value=0.5)#volume
+        div#videoControls.videoControls
+            div.videoControls_play
+                span#play.videoControls_playBtn
+                    i.fas.fa-play
+                div.videoControls_time
+                    span#currentTime 00:00
+                    span /
+                    sapn#totalTime 00:00
+            input(type="range", step="1", value=0, min="0")#timeLine
+            div.videoControls_volume 
+                input(type="range", step="0.1", min="0", max="1", value=0.5)#volume
+                span#mute
+                    i.fas.fa-volume-up
             div
-                span#currentTime 00:00
-                span /
-                sapn#totalTime 00:00
-            div
-                input(type="range", step="1", value=0, min="0")#timeLine
-            div
-                button#fullScreen Enter Full Screen
+                span#fullScreen
+                    i.fas.fa-expand
     div.video_data
         p.video_title=video.title
         small.video_owner Uploaded by
