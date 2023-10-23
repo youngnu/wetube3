@@ -85,6 +85,8 @@ const handleFullScreen = ( ) => {
     }
 };
 
+const hideControls = () => videoControls.classList.remove("showing")
+
 const handleMouseMove = () => {
     //마우스 커서가 div#videoControls 영역을 나갔다가 바로 다시 들어왔을때는 정의해주기 위함
     if(controlsTimeout) {
@@ -95,9 +97,7 @@ const handleMouseMove = () => {
 };
 
 const handleMouseLeave = () => {
-    controlsTimeout = setTimeout(()=>{
-        videoControls.classList.remove("showing")
-    }, 3000);
+    controlsTimeout = setTimeout(hideControls, 3000);
 }
 
 playBtn.addEventListener("click", handlePlayClick);
