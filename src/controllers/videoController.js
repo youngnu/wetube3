@@ -96,13 +96,14 @@ export const deleteVideo = async (req, res) => {
     return res.redirect('/')
 };
 
+//이 방식만으로는 video.meta.views에 +1을 해주진 못한다. 왜일까? 그건 바로 post Request를 못보내주고 있기 때문이다. apiRouter의 URL을 살펴봐라
 export const registerView = async (req, res) => {
     const {id} = req.params;
     const video = await Video.findById(id);
     if(!video){
-        return res.sendstatus(404)
+        return res.sendStatus(404);
     };
     video.meta.views = video.meta.views + 1;
     await video.save();
-    return video.sendstatus(200);
+    return res.sendStatus(200);
 }
