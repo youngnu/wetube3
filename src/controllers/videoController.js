@@ -94,4 +94,15 @@ export const deleteVideo = async (req, res) => {
     }
     await Video.findByIdAndDelete(id);
     return res.redirect('/')
+};
+
+export const registerView = async (req, res) => {
+    const {id} = req.params;
+    const video = await Video.findById(id);
+    if(!video){
+        return res.sendstatus(404)
+    };
+    video.meta.views = video.meta.views + 1;
+    await video.save();
+    return video.sendstatus(200);
 }
