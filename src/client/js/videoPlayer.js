@@ -10,7 +10,7 @@ const fullScreenBtn = document.getElementById("fullScreen");
 const videoContainer = document.getElementById("videoContainer");
 const videoControls = document.getElementById("videoControls");
 
-
+let controlsTimeout = null;
 let volumeValue = 0.5
 video.volume = volumeValue
 
@@ -86,13 +86,18 @@ const handleFullScreen = ( ) => {
 };
 
 const handleMouseMove = () => {
-    videoControls.classList.add("showing")
+    //마우스 커서가 div#videoControls 영역을 나갔다가 바로 다시 들어왔을때는 정의해주기 위함
+    if(controlsTimeout) {
+        clearTimeout(controlsTimeout)
+        controlsTimeout = null
+    };
+    videoControls.classList.add("showing");
 };
 
 const handleMouseLeave = () => {
-    setTimeout(()=>{
+    controlsTimeout = setTimeout(()=>{
         videoControls.classList.remove("showing")
-    }, 3000)
+    }, 3000);
 }
 
 playBtn.addEventListener("click", handlePlayClick);
