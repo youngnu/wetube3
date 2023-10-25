@@ -29,11 +29,14 @@ const handleStart = async() => {
         const videoFile = URL.createObjectURL(event.data);
         console.log("videoFile", videoFile)
         console.log("video.srcObject", video.srcObject)
+        // 미디어장치와의 연결을 끊기
         video.srcObject = null
         console.log("video.srcObject", video.srcObject)
         console.log("video.src", video.src)
+        // 비디어 요소와 vidoeFile의 blob URL을 연결하여 비디오 재생
         video.src = videoFile
         console.log("video.src", video.src)
+        //반복해서 recorder 재생
         video.loop = true 
         video.play()
     }
