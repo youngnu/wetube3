@@ -26,8 +26,16 @@ const handleStart = async() => {
     recorder.ondataavailable = (event) => {
         console.log("event", event);
         console.log("evet.data", event.data);
-        const video = URL.createObjectURL(event.data);
-        console.log("video", video)
+        const videoFile = URL.createObjectURL(event.data);
+        console.log("videoFile", videoFile)
+        console.log("video.srcObject", video.srcObject)
+        video.srcObject = null
+        console.log("video.srcObject", video.srcObject)
+        console.log("video.src", video.src)
+        video.src = videoFile
+        console.log("video.src", video.src)
+        video.loop = true 
+        video.play()
     }
     console.log("event1", recorder);
     recorder.start();
