@@ -3,11 +3,23 @@ const video = document.getElementById("preview");
 
 let stream;
 let recorder;
+let videoFile;
+
+const handleDownload = () => {
+    const a = document.createElement("a");
+    a.href = videoFile;
+    a.download = "MyRecording.webm";
+    document.body.appendChild(a);
+    a.click();
+    startBtn.innerText = "Recording Again"
+    startBtn.removeEventListener("click", handleDownload)
+    startBtn.addEventListener("click", handleStart)
+};
 
 const handleStop = () => {
-    startBtn.innerText = "Start Recording";
+    startBtn.innerText = "Download Recording";
     startBtn.removeEventListener("click",handleStop);
-    startBtn.addEventListener("click", handleStart);
+    startBtn.addEventListener("click", handleDownload);
     recorder.stop();
 };
 
@@ -22,11 +34,11 @@ const handleStart = async() => {
     startBtn.innerText = "Stop Recording";
     startBtn.removeEventListener("click", handleStart);
     startBtn.addEventListener("click", handleStop);
-    recorder = new MediaRecorder(stream);
+    recorder = new MediaRecorder(stream, { mimeType: "video/webm"});
     recorder.ondataavailable = (event) => {
         console.log("event", event);
         console.log("evet.data", event.data);
-        const videoFile = URL.createObjectURL(event.data);
+        videoFile = URL.createObjectURL(event.data);
         console.log("videoFile", videoFile)
         console.log("video.srcObject", video.srcObject)
         // 미디어장치와의 연결을 끊기
