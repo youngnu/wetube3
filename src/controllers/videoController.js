@@ -29,10 +29,8 @@ export const getEdit = async (req, res) => {
     const {id} = req.params;
     const {user: {_id}} = req.session;
     const video = await Video.findById(id);
-    console.log("id", id)
-    console.log("_id", _id)
-    console.log("video.owner", video.owner)
     if(String(video.owner) !== String(_id)){
+        req.flash ("error", "Login first")
         return res.status(403).redirect("/")
     }
     return res.render("edit", {pageTitle: "Editing", video});
@@ -47,7 +45,8 @@ export const postEdit = async (req, res) => {
         return res.render("404", {pageTitle: "video not found"});
     }
     if(String(video.owner) !== String(_id)){
-      return res.status(403).redirect("/") 
+        req.flash("error", "Login First")
+        return res.status(403).redirect("/") 
     }
     await Video.findByIdAndUpdate(id, {
         title,
@@ -93,6 +92,7 @@ export const deleteVideo = async (req, res) => {
         return res.status(403).redirect("/")
     }
     await Video.findByIdAndDelete(id);
+    req.flash("success", "Delete Success")
     return res.redirect('/')
 };
 

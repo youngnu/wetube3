@@ -7,10 +7,11 @@ export const localMiddleware = (req, res, next) => {
 };
 
 export const protectorMiddleware = (req, res, next) => {
-    if(!req.session.loggedIn){
-        return res.redirect("/")
-    } else {
+    if(req.session.loggedIn){
         return next()
+    } else {
+        req.flash("error", "Your're Not Login")
+        return res.redirect("/")
     }
 };
 
@@ -18,6 +19,7 @@ export const publicOnlyMiddleware = (req, res, next) => {
     if(!req.session.loggedIn){
         return next()
     } else {
+        req.flash("info", "Logout Please")
         return res.redirect("/")
     }
 };
