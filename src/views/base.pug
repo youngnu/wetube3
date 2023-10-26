@@ -6,12 +6,13 @@ html(lang="ko")
         link(rel="stylesheet" href="/static/css/styles.css")
 
     body
+        include mixins/messages
         if messages.error
-            span=messages.error
+            +message("error", text)
         if messages.info
-            span=messages.info
+            +message("info", text)
         if messages.success
-            span=messages.success
+            +message("success", messages.success)
         include partials/header.pug
         main 
             block content
