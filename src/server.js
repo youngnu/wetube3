@@ -1,6 +1,7 @@
 import express from "express";
 import morgan from "morgan";
 import session from "express-session";
+import flash from "express-flash";
 import MongoStore from "connect-mongo";
 import rootRouter from "./routers/rootRouter";
 import videoRouter from "./routers/videoRouter";
@@ -23,6 +24,8 @@ app.use(
         store: MongoStore.create({ mongoUrl: "mongodb://127.0.0.1:27017/wetube3"})
     })
 );
+// app.use(flash())로 req.flash(type, 내용)형태를 써줄 수 있게된다.
+app.use(flash());
 app.use(localMiddleware);
 //express.static -> 폴더의 파일들을 사용하기 위해 사용한다, express.static()미들웨어를 상요하면 애플리케이션에 정적파일을 제공할 수 있다.
 app.use("/uploads", express.static("uploads"));
