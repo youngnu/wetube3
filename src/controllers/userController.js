@@ -120,7 +120,7 @@ export const finshGithubLogin = async (req, res) => {
     }
 };
 
-
+// req.flash() require session
 export const handleLogout = (req, res) => {
     req.session.destroy()
     return res.redirect("/")
