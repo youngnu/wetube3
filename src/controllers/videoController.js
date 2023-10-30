@@ -110,5 +110,7 @@ export const registerView = async (req, res) => {
 }
 
 export const createComment = (req, res) => {
-    return res.redirect("/")
+    console.log(req.params);
+    console.log(req.body);
+    return res.end()
 }

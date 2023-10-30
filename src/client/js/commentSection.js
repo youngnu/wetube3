@@ -9,7 +9,8 @@ const handleSubmit = (event) => {
     const videoId = videoContainer.dataset.id;
     const text = textarea.value;
     fetch(`/api/videos/${videoId}/comment`, {
-        method: "POST"
+        method: "POST",
+        body: text,
     });
 }
 
