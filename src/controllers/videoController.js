@@ -108,3 +108,7 @@ export const registerView = async (req, res) => {
     await video.save();
     return res.sendStatus(200);
 }
+
+export const createComment = (req, res) => {
+    return res.redirect("/")
+}

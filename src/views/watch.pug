@@ -29,12 +29,14 @@ block content
             a(href=`${video.id}/edit`) Edit video &rarr;
             br
             a(href=`${video.id}/delete`) Delete video &rarr;
-    div.video_comment
-        form.video_comment_form#commentForm
-            textarea(cols="30", rows="10", placeholder="please writing")
-            button Submit
+    if loggedIn
+        div.video_comment
+            form.video_comment_form#commentForm
+                textarea(cols="30", rows="10", placeholder="please writing")
+                button Submit
 
 block scripts
     script(src="/static/js/videoPlayer.js")
-    script(src="/static/js/commentSection.js")
+    if loggedIn
+        script(src="/static/js/commentSection.js")
 
