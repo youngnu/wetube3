@@ -10,7 +10,12 @@ const handleSubmit = (event) => {
     const text = textarea.value;
     fetch(`/api/videos/${videoId}/comment`, {
         method: "POST",
-        body: text,
+        //express에게 우리가 보내는 것이 json이라고 알려줘야 한다.
+        headers: {
+            "Content-Type": "application/json"
+        },
+        //object로 보내면 controller에서 req.body로 접근이 불가능하기에, JSON.Stringify({})로 객체정보를 전달
+        body: JSON.stringify({ text })
     });
 }
 
