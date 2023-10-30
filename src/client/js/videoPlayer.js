@@ -107,6 +107,7 @@ const handleMouseLeave = () => {
     controlsTimeout = setTimeout(hideControls, 3000);
 }
 
+//비디오를 다 시청하면 "end"라는 evnet가 발생하여 그 정보를 fetch의 URL로 보내줌. 그럼 registerView라는 function이 작동하게끔 설정됨
 const handleEnded = () => {
     const {id} = videoContainer.dataset
     fetch(`/api/videos/${id}/view`, {
