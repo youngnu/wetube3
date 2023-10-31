@@ -34,9 +34,9 @@ block content
             form.video_comment_form#commentForm
                 textarea(cols="30", rows="5", placeholder="please writing")
                 button Submit
-    div.video_comment
+    div.video_comments
         ul
-            each comment in video.comments
+            each comment in video.comments.reverse()
                 li=comment.text
 
 block scripts
