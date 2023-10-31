@@ -7,9 +7,11 @@ export const handleHoem = async (req, res) => {
     return res.render("home", {pageTitle: "HOME", videos});
 };
 
+//populate()메서든 두 schema사이의 관계를 설정할때 사용하며, populate()안의 인수는 해당 model을 보면 된다. 지금 Video 모델에서는 "owner"도 "comments"도 schema의 필드로 들어가 있다.
 export const handleWatchVideo = async (req, res) => {
     const {id} = req.params;
-    const video = await Video.findById(id).populate("owner");
+    const video = await Video.findById(id).populate("owner").populate("comments");
+    console.log(video)
     return res.render("watch", {pageTitle: video.title, video});
 };
 
@@ -125,5 +127,7 @@ export const createComment = async (req, res) => {
         owner: user._id,
         video: id
     })
+    video.comments.push(comment._id);
+    video.save();
     return res.sendStatus(201);
-}
+} 
