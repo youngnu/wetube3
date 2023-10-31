@@ -39,7 +39,8 @@ block content
             each comment in video.comments.reverse()
                 li.video_comment
                     i.fas.fa-comment
-                    | #{comment.text}
+                        span=comment.text
+                        button ❌
 
 block scripts
     script(src="/static/js/videoPlayer.js")
