@@ -34,6 +34,10 @@ block content
             form.video_comment_form#commentForm
                 textarea(cols="30", rows="10", placeholder="please writing")
                 button Submit
+    div.video_comment
+        ul
+            each comment in video.comments
+                li=comment.text
 
 block scripts
     script(src="/static/js/videoPlayer.js")

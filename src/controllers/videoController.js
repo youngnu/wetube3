@@ -8,6 +8,8 @@ export const handleHoem = async (req, res) => {
 };
 
 //populate()메서든 두 schema사이의 관계를 설정할때 사용하며, populate()안의 인수는 해당 model을 보면 된다. 지금 Video 모델에서는 "owner"도 "comments"도 schema의 필드로 들어가 있다.
+//watch.pug로 렌더링 해주면서 video를 보내주고 있다. 여기에는 populate되어 있는 owner정보와 comments에 대한 정보도 포함되어있다.
+//그 결과 watch.pug에서는 video.owner과 video.comments를 쓸 수 있다.
 export const handleWatchVideo = async (req, res) => {
     const {id} = req.params;
     const video = await Video.findById(id).populate("owner").populate("comments");
