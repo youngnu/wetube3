@@ -338,6 +338,22 @@ form label {
   text-decoration: underline;
 }
 
+.video_comments {
+  display: flex;
+  flex-direction: column;
+  max-width: 320px;
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+.video_comments .video_comment {
+  padding: 10px;
+  border-radius: 1000px;
+  background-color: white;
+  color: black;
+  margin-bottom: 19px;
+}
+
 .search_form {
   margin-bottom: 60px;
   display: flex;

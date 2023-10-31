@@ -37,7 +37,9 @@ block content
     div.video_comments
         ul
             each comment in video.comments.reverse()
-                li=comment.text
+                li.video_comment
+                    i.fas.fa-comment
+                    | #{comment.text}
 
 block scripts
     script(src="/static/js/videoPlayer.js")

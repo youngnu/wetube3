@@ -4,14 +4,14 @@ const form = document.getElementById("commentForm");
 const textarea = document.querySelector("textarea");
 const btn = document.querySelector("button")
 
-const handleSubmit = (event) => {
+const handleSubmit = async (event) => {
     event.preventDefault();
     const videoId = videoContainer.dataset.id;
     const text = textarea.value;
     if(text === ""){
         return;
     }
-    fetch(`/api/videos/${videoId}/comment`, {
+    await fetch(`/api/videos/${videoId}/comment`, {
         method: "POST",
         //express에게 우리가 보내는 것이 json이라고 알려줘야 한다.
         headers: {
@@ -21,6 +21,8 @@ const handleSubmit = (event) => {
         body: JSON.stringify({ text })
     });
     textarea.value= "";
+    //async await와 함께 window.location.reload()를 쓰면 실시간 반응형 웹을 만들어 줄 수 있다.
+    window.location.reload();
 }
 
 
