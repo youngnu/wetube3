@@ -131,5 +131,7 @@ export const createComment = async (req, res) => {
     })
     video.comments.push(comment._id);
     video.save();
-    return res.sendStatus(201);
+    //Json응답: JSON은 데이터 교환에 매우 흔히 사용되는 형식이며, 클라이언트는 이를 쉽게 구문 분석하고 활용할 수 있습니다.
+    //json({newComment: comment._id})는 클라이언트가 생성된 댓글의 고유식별자(댓글 id)를 포함하는 JSON 객체를 반환합니다. 이것은 클라이언트가 이후에 댓글을 수정하거나 삭제하는 등의 작업을 할때 필요한 정보입니다
+    return res.status(201).json({ newCommentId: comment._id})
 } 
