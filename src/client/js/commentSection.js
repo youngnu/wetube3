@@ -17,7 +17,7 @@ const handleSubmit = async (event) => {
         headers: {
             "Content-Type": "application/json"
         },
-        //object로 보내면 controller에서 req.body로 접근이 불가능하기에, JSON.Stringify({})로 객체정보를 전달
+        //text가 아닌 {text}와 같은 object로 보내면 controller에서 req.body로 접근이 불가능하기에, JSON.Stringify({})로 문자열화하여 객체정보를 전달
         body: JSON.stringify({ text })
     });
     //async await와 함께 window.location.reload()를 쓰면 실시간 반응형 웹을 만들어 줄 수 있다.

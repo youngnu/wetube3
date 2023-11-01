@@ -117,6 +117,7 @@ export const registerView = async (req, res) => {
 export const createComment = async (req, res) => {
     const {
         params: {id},
+        //commentSection에서 json형식으로 text를 보내줬기에  req.body.text가 가능
         body: {text},
         session: {user}
     } = req;
@@ -129,6 +130,7 @@ export const createComment = async (req, res) => {
         owner: user._id,
         video: id
     })
+    //우린 mongoose.Schema로 Video model을 만들어 줬고, Video model에는 comments요소를 array([])형식으로 만들어줬기에, []에 집어넣으려면 push()를 해줘야 한다.
     video.comments.push(comment._id);
     video.save();
     //json()메서드는 서버에서 클라이언트로 데이터를 전송할 때 주로 사용되는 메서드로, json형식의 데이터를 전송함.
