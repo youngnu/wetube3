@@ -2,7 +2,7 @@
 const videoContainer = document.getElementById("videoContainer");
 const form = document.getElementById("commentForm");
 const textarea = document.querySelector("textarea");
-const deleteCommentBtn = document.querySelectorAll(".video_comments")
+const deleteCommentBtn = document.querySelectorAll(".video_comment")
 
 const handleSubmit = async (event) => {
     event.preventDefault();
@@ -49,13 +49,14 @@ const addComment = (text, id) => {
     newComment.appendChild(span);
     newComment.appendChild(deleteBtn);
     videoComment.prepend(newComment);
+    deleteBtn.addEventListener("click", handleDelete)
 };
 
 const handleDelete = (event) => {
     const deleteComment = event.target.parentElement;
-    console.log(deleteComment)
+    console.log("deleteCommnet", deleteComment)
     const commentId = deleteComment.dataset.id
-    console.log(commentId);
+    console.log("commnetID", commentId)
 }
 
 if(deleteCommentBtn){

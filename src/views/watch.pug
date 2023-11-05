@@ -30,7 +30,7 @@ block content
             br
             a(href=`${video.id}/delete`) Delete video &rarr;
     if loggedIn
-        div.video_comment
+        div.video_add_comment
             form.video_comment_form#commentForm
                 textarea(cols="30", rows="5", placeholder="please writing")
                 button Submit
