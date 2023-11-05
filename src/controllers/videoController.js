@@ -145,6 +145,8 @@ export const deleteComment = async (req, res) => {
     const videoId = comment.video
     const video = await Video.findById(videoId)
     //video.comments.splice(video.comments.indexOf(comment._id), 1)과 같은 기능을 수행해준다... 와우
+    //pull() Lodash 라이브러리에서 제공되는 메서드이다. 표준 JS배열 객체에 직접 pull을 사용할 수 는 없다.
+    //Lodash를 사용하려면 먼저 Lodash 라이브러리를 프로젝트에 추가해야된다고 하지만, 잘되는데?
     video.comments.pull(comment._id)
     await video.save()
     // Delete the comment from the database
