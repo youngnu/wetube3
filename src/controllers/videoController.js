@@ -13,7 +13,6 @@ export const handleHoem = async (req, res) => {
 export const handleWatchVideo = async (req, res) => {
     const {id} = req.params;
     const video = await Video.findById(id).populate("owner").populate("comments");
-    console.log(video)
     return res.render("watch", {pageTitle: video.title, video});
 };
 
@@ -137,3 +136,15 @@ export const createComment = async (req, res) => {
     //json({newComment: comment._id})는 클라이언트가 생성된 댓글의 고유식별자(댓글 id)를 포함하는 JSON 객체를 반환합니다. 이것은 클라이언트가 이후에 댓글을 수정하거나 삭제하는 등의 작업을 할때 필요한 정보입니다
     return res.status(201).json({ newCommentId: comment._id})
 } 
+
+export const deleteComment = async (req, res) => {
+    const {id} = req.params;
+    const comment = await Comment.findById(id);
+    //mongoose.Model로 Comment Schema를 설정할때 video를 넣어주었으며, populate를 통해 video와 comment의 관계를 설정해줬다.
+    //handlewatch Function에서
+    const videoId = comment.video
+    const video = await Video.findById(videoId)
+    console.log("video", video)
+    console.log("video.comment", video.comments)
+    return res.sendStatus(201);
+}

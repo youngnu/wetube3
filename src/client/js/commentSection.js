@@ -52,11 +52,17 @@ const addComment = (text, id) => {
     deleteBtn.addEventListener("click", handleDelete)
 };
 
-const handleDelete = (event) => {
+const handleDelete = async (event) => {
+    //event.target.parentElement : 함수에서 발생된 event의 부모인자를 선택해주는 기능을 수행
     const deleteComment = event.target.parentElement;
-    console.log("deleteCommnet", deleteComment)
     const commentId = deleteComment.dataset.id
-    console.log("commnetID", commentId)
+    //여기서 fetch는 프론트에서 백엔드로 Delete라는 요청을 전달하는 기능을 수행한다. 
+    const response = await fetch(`/api/videos/${commentId}/comment/delete`, {
+        method: "DELETE"
+    });
+    if(response.status === 201){
+        deleteComment.remove();
+    }
 }
 
 if(deleteCommentBtn){
