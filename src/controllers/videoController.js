@@ -144,7 +144,10 @@ export const deleteComment = async (req, res) => {
     //handlewatch Function에서
     const videoId = comment.video
     const video = await Video.findById(videoId)
-    console.log("video", video)
-    console.log("video.comment", video.comments)
+    //video.comments.splice(video.comments.indexOf(comment._id), 1)과 같은 기능을 수행해준다... 와우
+    video.comments.pull(comment._id)
+    await video.save()
+    // Delete the comment from the database
+    await Comment.deleteOne({_id: id})
     return res.sendStatus(201);
 }
