@@ -31,7 +31,7 @@
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {
-    "@ffmpeg/core": "^0.12.4",
+    "@ffmpeg/core": "^0.12.2",
     "@ffmpeg/ffmpeg": "^0.12.7",
     "@ffmpeg/util": "^0.12.1",
     "bcrypt": "^5.1.1",

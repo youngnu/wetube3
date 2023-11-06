@@ -7,15 +7,49 @@ let stream;
 let recorder;
 let videoFile;
 
-const handleDownload = () => {
-    const a = document.createElement("a");
-    //videoFile은 ㅣet으로 광역함수 되어 있으며, handleStart에서 URL.createObjectURL()을 이용하여 handleDownload로 넘겨짐
-    a.href = videoFile;
-    a.download = "MyRecording.webm";
+const file = {
+    input: "recording.webm",
+    output: "output.mp4",
+    tumb: "thumbnail.jpg"
+}
+
+const downloadFile = (fileUrl, fileName) => {
+    const a = document.createElement("a")
+    a.href = fileUrl
+    a.download = fileName
     document.body.appendChild(a);
     a.click();
-    startBtn.innerText = "Recording Again"
-    startBtn.removeEventListener("click", handleDownload)
+}
+
+const handleDownload = async () => {
+    startBtn.removeEventListener("click", handleDownload);
+    startBtn.innerText = "TransCoding..";
+    startBtn.disabled = true;
+    //FFmpeg 라이브러리 로드하기 위해 baseURL을 설정
+    const baseURL = 'https://unpkg.com/@ffmpeg/core@0.12.4/dist/umd';
+    const ffmpeg = new FFmpeg();
+    ffmpeg.on('log', ({message})=>console.log(message));
+
+    //CORS 이슈를 우회하기 위해 BlobURL을 사용
+    const coreResponse = await fetch(`${baseURL}/ffmpeg-core.js`);
+    const wasmResponse = await fetch(`${baseURL}/ffmpeg-core.wasm`);
+    const coreBlob = new Blob([await coreResponse.text()], {type: 'text/javascript'});
+    const wasmBlob = new Blob([await wasmResponse.arrayBuffer()], {type: 'application/wasm'});
+    const coreURL = URL.createObjectURL(coreBlob);
+    const wasmURL = URL.createObjectURL(wasmBlob);
+    await ffmpeg.load({coreURL, wasmURL});
+
+    // webm 파일을 MP4로 변경하는 코드
+    await ffmpeg.writeFile(file.input, await fetchFile(videoFile));
+    await ffmpeg.exec(['-i', file.input, file.output]);
+    const mp4File = await ffmpeg.readFile(file.output);
+    const mp4Blob = new Blob([mp4File.buffer], {type: 'video/mp4'});
+    const mp4Url = URL.createObjectURL(mp4Blob)
+
+    downloadFile(mp4Url, "Myrecording.mp4")
+
+    startBtn.disabled = false;
+    startBtn.innerText = "Recording"
     startBtn.addEventListener("click", handleStart)
 };
 
