@@ -13,6 +13,7 @@ const file = {
     tumb: "thumbnail.jpg"
 }
 
+// JS로 HTML 요소만들어주고, 링크 만들어주기
 const downloadFile = (fileUrl, fileName) => {
     const a = document.createElement("a")
     a.href = fileUrl
@@ -42,11 +43,17 @@ const handleDownload = async () => {
     // webm 파일을 MP4로 변경하는 코드
     await ffmpeg.writeFile(file.input, await fetchFile(videoFile));
     await ffmpeg.exec(['-i', file.input, file.output]);
+    await ffmpeg.exec(['-i', file.input, '-ss', '00:00:02', '-frames:v', '1', file.tumb]);
     const mp4File = await ffmpeg.readFile(file.output);
+    const tumbFile = await ffmpeg.readFile(file.tumb);
     const mp4Blob = new Blob([mp4File.buffer], {type: 'video/mp4'});
+    const tumbBlob = new Blob([tumbFile.buffer], {type: 'image/jpg'})
     const mp4Url = URL.createObjectURL(mp4Blob)
+    const tumbUrl = URL.createObjectURL(tumbBlob);
 
+    //downloadFile function으로 인수 넘겨주기
     downloadFile(mp4Url, "Myrecording.mp4")
+    downloadFile(tumbUrl, "Mytumbnail.jpg")
 
     startBtn.disabled = false;
     startBtn.innerText = "Recording"
