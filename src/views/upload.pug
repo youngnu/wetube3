@@ -10,6 +10,8 @@ block content
         form(method="POST", enctype="multipart/form-data")
             label(form="video") Video File
             input(id="video", name="video", type="file", accept="video/*")
+            label(form="tumb") tumbnail File
+            input(id="thumb", name="thumb", type="file", accept="image/*")
             input(placeholder="video title", required, type="text", name="title")
             input(placeholder="video description", required, type="text", name="description")
             input(placeholder="Hastags", required, type="text", name="hashtags")

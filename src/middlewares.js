@@ -26,7 +26,7 @@ export const publicOnlyMiddleware = (req, res, next) => {
 };
 
 export const avatarUpload = multer({
-    dest: "uploads/avatar"
+    dest: "uploads/avatars"
 })
 
 export const videoUpload = multer({

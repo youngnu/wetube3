@@ -67,11 +67,14 @@ export const getUpload = (req, res) => {
 export const postUpload = async (req, res) => {
     const { _id } = req.session.user;
     // const { user: {_id}} = req.session과 같다
-    const { path : fileUrl } = req.file
+    // videoRouter에서 single이 아닌 fileds를 써줬기 때문에 req.file이 아닌 req.files로 form에서 넘어온 객체정보를 받는다.
+    //req.files 객채는 fileds()안의 name들에 영향을 받는다.
+    const { video, thumb } = req.files
     const { title, description, hashtags } = req.body;
     const newVideo = await Video.create({
         title,
-        fileUrl,
+        fileUrl : video[0].path,
+        thumbUrl : thumb[0].path,
         description,
         hashtags: Video.formatHashtags(hashtags),
         meta: {

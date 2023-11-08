@@ -10,7 +10,7 @@ let videoFile;
 const file = {
     input: "recording.webm",
     output: "output.mp4",
-    tumb: "thumbnail.jpg"
+    thumb: "thumbnail.jpg"
 }
 
 // JS로 HTML 요소만들어주고, 링크 만들어주기
@@ -41,15 +41,16 @@ const handleDownload = async () => {
     await ffmpeg.load({coreURL, wasmURL});
 
     // webm 파일을 MP4로 변경하는 코드
+    //fetchFile() 함수를 사용하면 원격서버에서 파일을 가져와서 ffmpeg.wasm을 사용하여 해당 파일을 처리, 변환할 수 있음
     await ffmpeg.writeFile(file.input, await fetchFile(videoFile));
     await ffmpeg.exec(['-i', file.input, file.output]);
-    await ffmpeg.exec(['-i', file.input, '-ss', '00:00:02', '-frames:v', '1', file.tumb]);
+    await ffmpeg.exec(['-i', file.input, '-ss', '00:00:02', '-frames:v', '1', file.thumb]);
     const mp4File = await ffmpeg.readFile(file.output);
-    const tumbFile = await ffmpeg.readFile(file.tumb);
+    const thumbFile = await ffmpeg.readFile(file.thumb);
     const mp4Blob = new Blob([mp4File.buffer], {type: 'video/mp4'});
-    const tumbBlob = new Blob([tumbFile.buffer], {type: 'image/jpg'})
+    const thumbBlob = new Blob([thumbFile.buffer], {type: 'image/jpg'})
     const mp4Url = URL.createObjectURL(mp4Blob)
-    const tumbUrl = URL.createObjectURL(tumbBlob);
+    const tumbUrl = URL.createObjectURL(thumbBlob);
 
     //downloadFile function으로 인수 넘겨주기
     downloadFile(mp4Url, "Myrecording.mp4")
