@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "wetube practice coding using npm etc",
   "scripts": {
+    "start" : "node build/init.js",
+    "build" : "npm run build:server $$ npm run build:assets",
+    "build:server": "babel src -d build",
+    "build:assets" : "webpack --mode=production",
     "dev:server": "nodemon",
     "dev:assets": "webpack"
   },
@@ -17,7 +21,7 @@
   },
   "homepage": "https://github.com/youngnu/wetube3#readme",
   "devDependencies": {
-    "@babel/core": "^7.22.11",
+    "@babel/core": "^7.23.3",
     "@babel/node": "^7.22.10",
     "@babel/preset-env": "^7.22.14",
     "babel-loader": "^9.1.3",
@@ -31,6 +35,7 @@
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {
+    "@babel/cli": "^7.23.0",
     "@ffmpeg/core": "^0.12.2",
     "@ffmpeg/ffmpeg": "^0.12.7",
     "@ffmpeg/util": "^0.12.1",
