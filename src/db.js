@@ -7,5 +7,5 @@ const db = mongoose.connection;
 const handleOpen = () => console.log("✅ DB connected");
 const handleError = (error) => console.log("❌ DB Error", error);
 
-db.on("error", handleError);
+db.on("error", handleError); hehehehß
 db.once("open", handleOpen);
