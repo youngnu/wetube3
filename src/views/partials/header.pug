@@ -15,10 +15,7 @@ header
                     a(href="/users/edit") Edit Profile
                 li
                     a(href=`/users/${loggedInUser._id}`)
-                        if loggedInUser.avatarUrl === " "
-                            span 😘
-                        else
-                            if loggedInUser.socialOnly
+                           if loggedInUser.socialOnly
                                 img.header_avatar(src=loggedInUser.avatarUrl)
                             else
                                 img.header_avater(src="/" + loggedInUser.avatarUrl)
