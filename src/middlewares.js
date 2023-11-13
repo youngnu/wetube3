@@ -1,5 +1,6 @@
 //multer은 Node.js 웹 애플리케이션에서 파일 업로드를 처리하기 위한 미들웨어임. express.js와 함께 자주사용되며, 클라이언트로부터 서버로 파일을 업로드하는 기능을 제공
 import multer from "multer";
+import multerS3 from "multer-s3";
 
 export const localMiddleware = (req, res, next) => {
     res.locals.loggedIn = Boolean(req.session.loggedIn)
