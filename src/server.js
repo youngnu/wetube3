@@ -24,7 +24,7 @@ app.use(
         secret: process.env.DB_SECRET,
         resave: false,
         saveUninitialized: false,
-        store: MongoStore.create({ mongoUrl: process.env.DB_URL})
+        store: MongoStore.create({ mongoUrl: process.env.DB_URL })
     })
 );
 // app.use(flash())로 req.flash(type, 내용)형태를 써줄 수 있게된다.
