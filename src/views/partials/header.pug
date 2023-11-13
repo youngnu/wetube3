@@ -15,10 +15,10 @@ header
                     a(href="/users/edit") Edit Profile
                 li
                     a(href=`/users/${loggedInUser._id}`)
-                           if loggedInUser.socialOnly
+                            if isCloudtype
                                 img.header_avatar(src=loggedInUser.avatarUrl)
                             else
-                                img.header_avater(src="/" + loggedInUser.avatarUrl)
+                                img.header_avatar(src="/" + loggedInUser.avatarUrl)
             else 
                 li
                     a(href="/join").header_btn Join

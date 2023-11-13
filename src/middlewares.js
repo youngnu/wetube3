@@ -7,6 +7,8 @@ import multer from "multer";
 import multerS3 from "multer-s3";
 import aws from "aws-sdk";
 
+const isCloudtype = process.env.NODE_ENV === "production"
+
 const s3 = new aws.S3({
     credentials: {
         accessKeyId: process.env.AWS_ID,
@@ -29,6 +31,7 @@ const s3ImageUploader = multerS3({
 export const localMiddleware = (req, res, next) => {
     res.locals.loggedIn = Boolean(req.session.loggedIn)
     res.locals.loggedInUser = req.session.user || {}
+    res.locals.isCloudtype = isCloudtype;
     next()
 };
 
@@ -52,10 +55,10 @@ export const publicOnlyMiddleware = (req, res, next) => {
 
 export const avatarUpload = multer({
     dest: "uploads/avatars",
-    storage: s3ImageUploader
-})
+    storage: isCloudtype? s3ImageUploader: undefined
+});
 
 export const videoUpload = multer({
     dest: "uploads/videos",
-    storage: s3VideoUploader
-})
+    storage: isCloudtype? s3VideoUploader: undefined
+});
