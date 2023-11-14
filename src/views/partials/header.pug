@@ -17,8 +17,6 @@ header
                     a(href=`/users/${loggedInUser._id}`)
                             if isCloudtype
                                 img.header_avatar(src=loggedInUser.avatarUrl)
-                            else
-                                img.header_avatar(src="/" + loggedInUser.avatarUrl)
             else 
                 li
                     a(href="/join").header_btn Join
