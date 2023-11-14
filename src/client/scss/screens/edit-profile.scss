@@ -6,6 +6,15 @@ form {
     }
 }
 
+.edit-profile-image {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 500;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
 .edit-profile-password {
     margin-top: 50px;
     text-align: center;
