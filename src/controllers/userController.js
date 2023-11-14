@@ -141,7 +141,8 @@ export const postEdit = async (req, res) => {
         name,
         email,
         username,
-        avatarUrl: file? file.path : avatarUrl
+        // multerS3는 AWS에 파일을 업로드 하게끔 도와주며, 해당피일은 file.path가 아닌 file.location을 통해 접근이 가능하다.
+        avatarUrl: file? file.location : avatarUrl
         },
         { new: true } // findbyidandupdate() give after update applied
     );
