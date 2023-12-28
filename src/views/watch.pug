@@ -40,7 +40,8 @@ block content
                 li.video_comment(data-id = comment._id)
                     i.fas.fa-comment
                     span=comment.text
-                    button ❌
+                    if String(comment.owner) === String(loggedInUser._id)
+                        button ❌
 
 block scripts
     script(src="/static/js/videoPlayer.js")
